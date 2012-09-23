@@ -39,7 +39,7 @@ public:
 	void showChatbotOutput() {
 		// prints the string value of cbOutput
 
-		cout <<cbOutput << endl;
+		cout << cbOutput << endl;
 	}
 };
 
@@ -57,16 +57,36 @@ void compareKeywords() {
 	// description goes here
 }
 
-string getKeywords(){
-    string s;
-    getline (cin, s);
+string input2UPPER(){
+	string s;
+	getline (cin, s);
+	cout << endl;
 
     for(int i; i< s.length(); i++){
         if( int(s.at(i)) <= int('z') && int(s.at(i)) >= int('a')){
             s.at(i) = char(int(s.at(i)) + int('A') - int('a'));
         }
     }
-    return s;
+	return s;
+}
+
+string getKeywords(){
+	string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
+
+	cout << "Available keywords: ";
+	for(int i=0; i < 5; i++){
+		cout << kwDummy[i];
+		if(i<5-1) cout << ", ";
+	}
+	cout << endl;
+
+	cout << "You: ";
+    return input2UPPER();
+}
+
+bool running(){
+	cout << "Do you want to continue? (yes or no): ";
+	return (input2UPPER() != "NO");
 }
 
 void getResponseNode(){
@@ -83,14 +103,14 @@ void main()
 	// data declarations
 	Chatbot Alice;
 	string keywords;
-	int i = 0;
+	
 
 	// read keyword file and push responses to memory
 	do {
-		cout << "Enter Dialogue: ";
+		
 		keywords = getKeywords();
-		cout << keywords;
-		i++;
-	}while (i < 5);
+		//cout << keywords;
+		
+	}while (running());
 
 }
