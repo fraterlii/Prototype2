@@ -6,6 +6,29 @@
 
 
 using namespace std;
+public class ResponseNode
+{
+public:
+	// data declarations
+	string response;
+	int outputCount;
+
+	// member functions
+	string responseOutput(){
+		// returns response string for output and increments outputCount by 1
+
+		outputCount = outputCount +1;
+		return response;
+	}
+
+	// class constructor
+	ResponseNode(string constructorString, int constructorInt){
+		response = constructorString;
+		outputCount = constructorInt;
+	}
+};
+
+using namespace std;
 public class Chatbot
 {
 public:
@@ -18,29 +41,21 @@ public:
 
 		cout <<cbOutput << endl;
 	}
-
-	void configureResponses() {
-		// description goes here
-	}
-
-	void FileReading() {
-		// description goes here
-
-		string resp;
-		ifstream myFile;
-		myFile.open("datafile.txt");
-
-		while(!myFile.eof()) {
-			getline(myFile,resp);
-			cout<<resp<<endl;
-		}
-
-		myFile.close();
-	}
 };
 
-namespace chatter {
+namespace mainMethods {
 using namespace std;
+
+
+
+
+void buildAliceArray(){
+	// builds a 2D array of Keywords and ResponseNodes appropriate to the Alice Chatbot
+}
+
+void compareKeywords() {
+	// description goes here
+}
 
 string getKeywords(){
     string s;
@@ -51,15 +66,18 @@ string getKeywords(){
             s.at(i) = char(int(s.at(i)) + int('A') - int('a'));
         }
     }
-
     return s;
+}
+
+void getResponseNode(){
+	// description goes here
 }
 
 }
 
 
 using namespace std;
-using namespace chatter;
+using namespace mainMethods;
 void main()
 {
 	// data declarations
@@ -68,8 +86,6 @@ void main()
 	int i = 0;
 
 	// read keyword file and push responses to memory
-	Alice.FileReading();
-
 	do {
 		cout << "Enter Dialogue: ";
 		keywords = getKeywords();
