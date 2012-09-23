@@ -4,86 +4,45 @@
 #include <time.h>
 #include <fstream>
 
-using namespace std;
-public class ResponseNode
-{
-public:
-string response;
-int outputCount;
-//this is me
-// class constructor
-ResponseNode(string init) {
-response = init;
-int outputCount = 0;
-}
-
-ResponseNode() {
-int outputCount = 0;
-}
-};
-
-
 
 using namespace std;
 public class Chatbot
 {
-private:
-
 public:
-// chatbot-related data declarations
-string cbOutput;
-ResponseNode x[5];
+	// chatbot-related data declarations
+	string cbOutput;
 
-// user-related data declarations
-string uInput;
-string uKeywordsArray[];
+	// member functions
+	void showChatbotOutput() {
+		// prints the string value of cbOutput
 
-// class constructor
-Chatbot() {
-//configureResponses();
-	
-	showChatbotOutput();
-}
+		cout <<cbOutput << endl;
+	}
 
-// member functions
-void showChatbotOutput() {
-cout <<cbOutput << endl;
-}
+	void configureResponses() {
+		// description goes here
+	}
 
-void configureResponses() {
+	void FileReading() {
+		// description goes here
 
-}
+		string resp;
+		ifstream myFile;
+		myFile.open("datafile.txt");
 
-void FileReading()
-{
-	string resp;
-	ifstream myFile;
-	myFile.open("datafile.txt");
-
-		while(!myFile.eof())
-		{
+		while(!myFile.eof()) {
 			getline(myFile,resp);
 			cout<<resp<<endl;
 		}
 
-	myFile.close();
-}
+		myFile.close();
+	}
 };
 
 namespace chatter {
-#include <string>
 using namespace std;
 
-string outputCB;
-string greetingsArrayCB[4] = {"WHERE WERE THE OTHER DRUGS GOING?!", "SWEAR TO ME!", "DO I LOOK LIKE A COP?!", "WHERE ARE THEY?!"};
-
-// Displays the std::string value of ChatBot variable 'outputCB'
-void showOutputCB(){
-cout<< outputCB << endl;
-	}
-}
-
-string getInput(){
+string getKeywords(){
     string s;
     getline (cin, s);
 
@@ -96,23 +55,26 @@ string getInput(){
     return s;
 }
 
+}
+
 
 using namespace std;
+using namespace chatter;
 void main()
 {
-
-	string input;
+	// data declarations
 	Chatbot Alice;
-	Alice.FileReading();
+	string keywords;
 	int i = 0;
+
+	// read keyword file and push responses to memory
+	Alice.FileReading();
 
 	do {
 		cout << "Enter Dialogue: ";
-		input = getInput();
+		keywords = getKeywords();
+		cout << keywords;
 		i++;
-
 	}while (i < 5);
-
-	//system ("pause");
 
 }
