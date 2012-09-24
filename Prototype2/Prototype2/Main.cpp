@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <fstream>
-
+#include <sstream>
+#include <vector>
 
 using namespace std;
 public class ResponseNode
@@ -103,14 +104,23 @@ void main()
 	// data declarations
 	Chatbot Alice;
 	string keywords;
-	
+	string buf;
 
 	// read keyword file and push responses to memory
 	do {
 		
 		keywords = getKeywords();
 		//cout << keywords;
-		
+		cin.get();
+		stringstream ss(keywords);
+		vector<string> tokens;
+		ofstream outputFile;
+		outputFile.open("datafile.txt");
+		while(ss>>buf){
+			tokens.push_back(buf);
+			outputFile<<buf+"\n";
+			cout<<buf+"\n";
+		} outputFile.close();
 	}while (running());
 
 }
