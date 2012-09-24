@@ -100,11 +100,10 @@ void main()
 	string keywords;
 	string buf;
 
-	// read keyword file and push responses to memory
+	// member functions
 	do {
 		
 		keywords = getKeywords();
-		//cout << keywords;
 		cin.get();
 		stringstream ss(keywords);
 		vector<string> tokens;
