@@ -48,12 +48,6 @@ namespace mainMethods {
 using namespace std;
 
 
-
-
-void buildAliceArray(){
-	// builds a 2D array of Keywords and ResponseNodes appropriate to the Alice Chatbot
-}
-
 void compareKeywords() {
 	// description goes here
 }
