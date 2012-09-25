@@ -22,11 +22,13 @@ public:
 		return response;
 	}
 
-	// class constructor
-	ResponseNode(string constructorString, int constructorInt){
+	void manualConstructor(string constructorString, int constructorInt){
 		response = constructorString;
 		outputCount = constructorInt;
 	}
+
+	// class constructor
+	ResponseNode() {};
 };
 
 using namespace std;
@@ -47,12 +49,32 @@ public:
 namespace mainMethods {
 using namespace std;
 
+	// data declarations
+	ResponseNode alice_RNArray[5][5];
 
-void compareKeywords() {
+	// namespace member functions
+	void build_alice_RNArray() {
+		// DRUGS
+		alice_RNArray[0][0].manualConstructor("What drugs?", 0);
+		alice_RNArray[0][1].manualConstructor("I don't do drugs!", 0);
+		alice_RNArray[0][2].manualConstructor("What exactly are you accusing me of?", 0);
+		alice_RNArray[0][3].manualConstructor("I don't know what you're talking about.", 0);
+		alice_RNArray[0][4].manualConstructor("I'm not saying another word.", 0);
+
+		// GUNS
+
+		// KIDNAP
+
+		// CAR
+
+		// PAO
+	}
+	
+	void compareKeywords() {
 	// description goes here
 }
 
-string input2UPPER(){
+	string input2UPPER(){
 	string s;
 	getline (cin, s);
 	cout << endl;
@@ -65,7 +87,7 @@ string input2UPPER(){
 	return s;
 }
 
-string getKeywords(){
+	string getKeywords(){
 	string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
 
 	cout << "Available keywords: ";
@@ -79,14 +101,14 @@ string getKeywords(){
     return input2UPPER();
 }
 
-bool running(){
+	bool running(){
 	cout << "Do you want to continue? (yes or no): ";
 	return (input2UPPER() != "NO");
 }
 
-void getResponseNode(){
+	void getResponseNode(){
 	// description goes here
-}
+	}
 
 }
 
@@ -96,6 +118,7 @@ using namespace mainMethods;
 void main()
 {
 	// data declarations
+	build_alice_RNArray();
 	Chatbot Alice;
 	string keywords;
 	string buf;
