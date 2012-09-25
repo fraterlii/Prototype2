@@ -35,7 +35,7 @@ using namespace std;
 public class Chatbot
 {
 public:
-	// chatbot-related data declarations
+	// data declarations
 	string cbOutput;
 
 	// member functions
@@ -52,8 +52,10 @@ using namespace std;
 	// data declarations
 	ResponseNode alice_RNArray[5][5];
 
-	// namespace member functions
+	// member functions
 	void build_alice_RNArray() {
+		// Initializes each value within the alice_RNArray[5][5] variable
+
 		// DRUGS
 		alice_RNArray[0][0].manualConstructor("What drugs?", 0);
 		alice_RNArray[0][1].manualConstructor("I don't do drugs!", 0);
@@ -71,43 +73,43 @@ using namespace std;
 	}
 	
 	void compareKeywords() {
-	// description goes here
+		// description goes here
 }
 
 	string input2UPPER(){
-	string s;
-	getline (cin, s);
-	cout << endl;
+		string s;
+		getline (cin, s);
+		cout << endl;
 
-    for(int i; i< s.length(); i++){
-        if( int(s.at(i)) <= int('z') && int(s.at(i)) >= int('a')){
-            s.at(i) = char(int(s.at(i)) + int('A') - int('a'));
-        }
-    }
-	return s;
+		for(int i; i< s.length(); i++){
+			if( int(s.at(i)) <= int('z') && int(s.at(i)) >= int('a')){
+				s.at(i) = char(int(s.at(i)) + int('A') - int('a'));
+			}
+		}
+		return s;
 }
 
 	string getKeywords(){
-	string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
+		string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
 
-	cout << "Available keywords: ";
-	for(int i=0; i < 5; i++){
-		cout << kwDummy[i];
-		if(i<5-1) cout << ", ";
-	}
-	cout << endl;
+		cout << "Available keywords: ";
+		for(int i=0; i < 5; i++){
+			cout << kwDummy[i];
+			if(i<5-1) cout << ", ";
+		}
+		cout << endl;
 
-	cout << "You: ";
-    return input2UPPER();
+		cout << "You: ";
+		return input2UPPER();
 }
 
 	bool running(){
-	cout << "Do you want to continue? (yes or no): ";
-	return (input2UPPER() != "NO");
-}
+		cout << "Do you want to continue? (yes or no): ";
+		return (input2UPPER() != "NO");
+	}
 
 	void getResponseNode(){
-	// description goes here
+		// description goes here
 	}
 
 }
