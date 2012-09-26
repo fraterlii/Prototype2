@@ -7,6 +7,9 @@
 #include <vector>
 
 using namespace std;
+
+string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
+
 public class ResponseNode
 {
 public:
@@ -72,12 +75,15 @@ using namespace std;
 		// PAO
 	}
 	
-	void compareKeywords() {
-		// description goes here
+	void compareKeywords(string buf) {
+		
+		for (int i=0; i < 5; i++){
+			if (buf == kwDummy[i]){
+				cout << "There is a match: " << kwDummy[i] << endl;
 
-		String word = getString();
-
-}
+			}
+		}
+	}
 
 	string input2UPPER(){
 		string s;
@@ -93,7 +99,7 @@ using namespace std;
 }
 
 	string getKeywords(){
-		string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
+		
 
 		cout << "Available keywords: ";
 		for(int i=0; i < 5; i++){
@@ -132,7 +138,7 @@ void main()
 	do {
 		
 		keywords = getKeywords();
-		cin.get();
+		//cin.get();
 		stringstream ss(keywords);
 		vector<string> tokens;
 		ofstream outputFile;
@@ -141,6 +147,7 @@ void main()
 			tokens.push_back(buf);
 			outputFile<<buf+"\n";
 			cout<<buf+"\n";
+			compareKeywords(buf);
 		} outputFile.close();
 	}while (running());
 	
