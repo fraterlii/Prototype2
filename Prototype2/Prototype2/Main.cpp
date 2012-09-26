@@ -74,6 +74,9 @@ using namespace std;
 	
 	void compareKeywords() {
 		// description goes here
+
+		String word = getString();
+
 }
 
 	string input2UPPER(){
@@ -124,7 +127,7 @@ void main()
 	Chatbot Alice;
 	string keywords;
 	string buf;
-
+	
 	// member functions
 	do {
 		
@@ -140,5 +143,5 @@ void main()
 			cout<<buf+"\n";
 		} outputFile.close();
 	}while (running());
-
+	
 }
