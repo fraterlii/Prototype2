@@ -63,15 +63,15 @@ using namespace std;
 		alice_RNArray[0][0].manualConstructor("What drugs?", 0);
 		alice_RNArray[0][1].manualConstructor("I don't do drugs!", 0);
 		alice_RNArray[0][2].manualConstructor("What exactly are you accusing me of?", 0);
-		alice_RNArray[0][3].manualConstructor("I don't know what you're talking about.", 0);
-		alice_RNArray[0][4].manualConstructor("I'm not saying another word.", 0);
+		alice_RNArray[0][3].manualConstructor("I don't know what you're talking about, and I'm not saying another word.", 0);
+		alice_RNArray[0][4].manualConstructor("I might have had a bump before leaving the party, but nothing major...", 0);
 
 		// GUNS
 		alice_RNArray[1][0].manualConstructor("What guns?", 0);
 		alice_RNArray[1][1].manualConstructor("I don't own any guns!", 0);
-		alice_RNArray[1][2].manualConstructor("", 0);
-		alice_RNArray[1][3].manualConstructor("", 0);
-		alice_RNArray[1][4].manualConstructor("", 0);
+		alice_RNArray[1][2].manualConstructor("What exactly are you accusing me of?", 0);
+		alice_RNArray[1][3].manualConstructor("I have a right to silence.  I'm done answering these questions.", 0);
+		alice_RNArray[1][4].manualConstructor("It's my boyfriend's car!  I'm not responsible for anything you found in there!", 0);
 
 		// KIDNAP
 		alice_RNArray[2][0].manualConstructor("", 0);
