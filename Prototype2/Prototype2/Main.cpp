@@ -67,12 +67,32 @@ using namespace std;
 		alice_RNArray[0][4].manualConstructor("I'm not saying another word.", 0);
 
 		// GUNS
+		alice_RNArray[1][0].manualConstructor("What guns?", 0);
+		alice_RNArray[1][1].manualConstructor("I don't own any guns!", 0);
+		alice_RNArray[1][2].manualConstructor("", 0);
+		alice_RNArray[1][3].manualConstructor("", 0);
+		alice_RNArray[1][4].manualConstructor("", 0);
 
 		// KIDNAP
+		alice_RNArray[2][0].manualConstructor("", 0);
+		alice_RNArray[2][1].manualConstructor("", 0);
+		alice_RNArray[2][2].manualConstructor("", 0);
+		alice_RNArray[2][3].manualConstructor("", 0);
+		alice_RNArray[2][4].manualConstructor("", 0);
 
 		// CAR
+		alice_RNArray[3][0].manualConstructor("", 0);
+		alice_RNArray[3][1].manualConstructor("", 0);
+		alice_RNArray[3][2].manualConstructor("", 0);
+		alice_RNArray[3][3].manualConstructor("", 0);
+		alice_RNArray[3][4].manualConstructor("", 0);
 
 		// PAO
+		alice_RNArray[4][0].manualConstructor("", 0);
+		alice_RNArray[4][1].manualConstructor("", 0);
+		alice_RNArray[4][2].manualConstructor("", 0);
+		alice_RNArray[4][3].manualConstructor("", 0);
+		alice_RNArray[4][4].manualConstructor("", 0);
 	}
 	
 	void compareKeywords(string buf) {
@@ -80,7 +100,7 @@ using namespace std;
 		for (int i=0; i < 5; i++){
 			if (buf == kwDummy[i]){
 				cout << "There is a match: " << kwDummy[i] << endl;
-
+				
 			}
 		}
 	}
@@ -93,6 +113,9 @@ using namespace std;
 		for(int i; i< s.length(); i++){
 			if( int(s.at(i)) <= int('z') && int(s.at(i)) >= int('a')){
 				s.at(i) = char(int(s.at(i)) + int('A') - int('a'));
+			}
+			else {
+				s.at(i) = ' ';
 			}
 		}
 		return s;
