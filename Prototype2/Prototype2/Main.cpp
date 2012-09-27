@@ -10,6 +10,7 @@ using namespace std;
 
 // globally defined data declarations
 string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
+string negativeResponses[] = {"Wanna run that by me again?", "SPEAK CLEARLY!", "Is this some kind of mind game?", "What?", "I don't understand what you're getting at..."};
 
 public class ResponseNode
 {
@@ -91,17 +92,21 @@ using namespace std;
 		alice_RNArray[3][4].manualConstructor("car5", 0);
 
 		// PAO
-		alice_RNArray[4][0].manualConstructor("Twenty percent of your semester grade.", 0);
-		alice_RNArray[4][1].manualConstructor("I cannot.", 0);
-		alice_RNArray[4][2].manualConstructor("I try to help you.", 0);
-		alice_RNArray[4][3].manualConstructor("You tell me, is it fair?", 0);
-		alice_RNArray[4][4].manualConstructor("Wooow!", 0);
+		alice_RNArray[4][0].manualConstructor("20% your semester grade.", 0);
+		alice_RNArray[4][1].manualConstructor("20% your semester grade.", 0);
+		alice_RNArray[4][2].manualConstructor("20% your semester grade.", 0);
+		alice_RNArray[4][3].manualConstructor("20% your semester grade.", 0);
+		alice_RNArray[4][4].manualConstructor("20% your semester grade.", 0);
 	}
 	
 	int compareKeywords(string buf) {
 		// checks the string parameter (user input) against the string values in kwDummy[]
 		// if a match is found, the index of the match is returned
 		// otherwise, a value of -1 is returned
+
+		if (buf == "HINT" | buf == "QUIT") {
+			return -5;
+		}
 
 		for (int i=0; i < 5; i++){
 			if (buf == kwDummy[i]){
@@ -161,6 +166,15 @@ using namespace std;
 		// description goes here
 	}
 
+	void show_AliceExposition() {
+		cout << "Suspect Name, Age, Sex, D.O.B.:  " << "\n\n  Alice Kremieux\n  23, Female\n  Feb. 3rd, 1989" << endl;
+		
+
+		cout << "\nMove on to questioning...";
+		cin.get();
+		cout << "\n\n";
+	}
+
 }
 
 
@@ -175,12 +189,13 @@ void main()
 	string keywords;
 	string buf;
 	int kw;
+
+	show_AliceExposition();
 	
-	// member functions
+
 	do {
 		
 		keywords = getKeywords();
-		//cin.get();
 		stringstream ss(keywords);
 		vector<string> tokens;
 		ofstream outputFile;
@@ -190,12 +205,14 @@ void main()
 		while(ss>>buf){
 			tokens.push_back(buf);
 			outputFile<<buf+"\n";
-			//cout<<buf+"\n";
 			kw = compareKeywords(buf);
 			if (kw >= 0){
-				int selection = rand() % 5;
-				mainresponse = alice_RNArray[kw][selection].responseOutput();
+				mainresponse = alice_RNArray[kw][rand() % 5].responseOutput();
 				cout << "Alice: " << mainresponse << endl << "\n";
+			}
+			else if (kw == -1) {
+				cout << "Alice: " << negativeResponses[rand() % 5] << endl << "\n";
+				break;
 			}
 		} outputFile.close();
 	}while (running(buf));
