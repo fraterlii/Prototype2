@@ -8,16 +8,17 @@
 
 using namespace std;
 
+// globally defined data declarations
 string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
 
 public class ResponseNode
 {
 public:
-	// data declarations
+	// local data declarations
 	string response;
 	int outputCount;
 
-	// member functions
+	// local member functions
 	string responseOutput(){
 		// returns response string for output and increments outputCount by 1
 
@@ -26,6 +27,8 @@ public:
 	}
 
 	void manualConstructor(string constructorString, int constructorInt){
+		// use this to initialize the ResponseNode objects
+
 		response = constructorString;
 		outputCount = constructorInt;
 	}
@@ -52,26 +55,26 @@ public:
 namespace mainMethods {
 using namespace std;
 
-	// data declarations
+	// namespace data declarations
 	ResponseNode alice_RNArray[5][5];
 
-	// member functions
+	// namespace member functions
 	void build_alice_RNArray() {
 		// Initializes each value within the alice_RNArray[5][5] variable
 
 		// DRUGS
 		alice_RNArray[0][0].manualConstructor("What drugs?", 0);
-		alice_RNArray[0][1].manualConstructor("I don't do drugs!", 0);
+		alice_RNArray[0][1].manualConstructor("I don't do drugs.", 0);
 		alice_RNArray[0][2].manualConstructor("What exactly are you accusing me of?", 0);
 		alice_RNArray[0][3].manualConstructor("I don't know what you're talking about, and I'm not saying another word.", 0);
 		alice_RNArray[0][4].manualConstructor("I might have had a bump before leaving the party, but nothing major...", 0);
 
 		// GUNS
 		alice_RNArray[1][0].manualConstructor("What guns?", 0);
-		alice_RNArray[1][1].manualConstructor("I don't own any guns!", 0);
+		alice_RNArray[1][1].manualConstructor("I don't own any guns.", 0);
 		alice_RNArray[1][2].manualConstructor("What exactly are you accusing me of?", 0);
 		alice_RNArray[1][3].manualConstructor("I have a right to silence.  I'm done answering these questions.", 0);
-		alice_RNArray[1][4].manualConstructor("It's my boyfriend's car!  I'm not responsible for anything you found in there!", 0);
+		alice_RNArray[1][4].manualConstructor("It's my boyfriend's car!\nI'm not responsible for anything you found in there!", 0);
 
 		// KIDNAP
 		alice_RNArray[2][0].manualConstructor("kidnap1", 0);
@@ -96,10 +99,12 @@ using namespace std;
 	}
 	
 	int compareKeywords(string buf) {
-		
+		// checks the string parameter (user input) against the string values in kwDummy[]
+		// if a match is found, the index of the match is returned
+		// otherwise, a value of -1 is returned
+
 		for (int i=0; i < 5; i++){
 			if (buf == kwDummy[i]){
-				//cout << "There is a match: " << kwDummy[i] << endl;
 				return i;
 			}
 		}
@@ -120,25 +125,36 @@ using namespace std;
 			}
 		}
 		return s;
-}
+	}
 
 	string getKeywords(){
-		
+		// returns the punctuation-trimmed, capitalized Keyword values
 
-		cout << "Available keywords: ";
-		for(int i=0; i < 5; i++){
+		cout << "Echevvery: ";
+		return input2UPPER();
+	}
+
+	void showCasePoints() {
+		cout << "Case Points: ";
+		for(int i=0; i < 4; i++){
 			cout << kwDummy[i];
-			if(i<5-1) cout << ", ";
+			if(i<4-1) cout << ", ";
 		}
 		cout << endl;
+	}
 
-		cout << "You: ";
-		return input2UPPER();
-}
-
-	bool running(){
-		cout << "Do you want to continue? (yes or no): ";
-		return (input2UPPER() != "NO");
+	bool running(string buf){
+		if (buf == "QUIT") {
+		cout << "\n\n\nDo you want to continue? (y or n): ";
+		return (input2UPPER() != "N");
+		}
+		else if (buf == "HINT") {
+			showCasePoints();
+			return true;
+		}
+		else {
+			return true;
+		}
 	}
 
 	void getResponseNode(){
@@ -179,9 +195,9 @@ void main()
 			if (kw >= 0){
 				int selection = rand() % 5;
 				mainresponse = alice_RNArray[kw][selection].responseOutput();
-				cout << "Alice: " << mainresponse <<endl;
+				cout << "Alice: " << mainresponse << endl << "\n";
 			}
 		} outputFile.close();
-	}while (running());
+	}while (running(buf));
 	
 }
