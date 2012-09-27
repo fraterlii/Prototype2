@@ -74,35 +74,36 @@ using namespace std;
 		alice_RNArray[1][4].manualConstructor("It's my boyfriend's car!  I'm not responsible for anything you found in there!", 0);
 
 		// KIDNAP
-		alice_RNArray[2][0].manualConstructor("", 0);
-		alice_RNArray[2][1].manualConstructor("", 0);
-		alice_RNArray[2][2].manualConstructor("", 0);
-		alice_RNArray[2][3].manualConstructor("", 0);
-		alice_RNArray[2][4].manualConstructor("", 0);
+		alice_RNArray[2][0].manualConstructor("kidnap1", 0);
+		alice_RNArray[2][1].manualConstructor("kidnap2", 0);
+		alice_RNArray[2][2].manualConstructor("kidnap3", 0);
+		alice_RNArray[2][3].manualConstructor("kidnap4", 0);
+		alice_RNArray[2][4].manualConstructor("kidnap5", 0);
 
 		// CAR
-		alice_RNArray[3][0].manualConstructor("", 0);
-		alice_RNArray[3][1].manualConstructor("", 0);
-		alice_RNArray[3][2].manualConstructor("", 0);
-		alice_RNArray[3][3].manualConstructor("", 0);
-		alice_RNArray[3][4].manualConstructor("", 0);
+		alice_RNArray[3][0].manualConstructor("car1", 0);
+		alice_RNArray[3][1].manualConstructor("car2", 0);
+		alice_RNArray[3][2].manualConstructor("car3", 0);
+		alice_RNArray[3][3].manualConstructor("car4", 0);
+		alice_RNArray[3][4].manualConstructor("car5", 0);
 
 		// PAO
-		alice_RNArray[4][0].manualConstructor("", 0);
-		alice_RNArray[4][1].manualConstructor("", 0);
-		alice_RNArray[4][2].manualConstructor("", 0);
-		alice_RNArray[4][3].manualConstructor("", 0);
-		alice_RNArray[4][4].manualConstructor("", 0);
+		alice_RNArray[4][0].manualConstructor("Twenty percent of your semester grade.", 0);
+		alice_RNArray[4][1].manualConstructor("I cannot.", 0);
+		alice_RNArray[4][2].manualConstructor("I try to help you.", 0);
+		alice_RNArray[4][3].manualConstructor("You tell me, is it fair?", 0);
+		alice_RNArray[4][4].manualConstructor("Wooow!", 0);
 	}
 	
-	void compareKeywords(string buf) {
+	int compareKeywords(string buf) {
 		
 		for (int i=0; i < 5; i++){
 			if (buf == kwDummy[i]){
-				cout << "There is a match: " << kwDummy[i] << endl;
-				
+				//cout << "There is a match: " << kwDummy[i] << endl;
+				return i;
 			}
 		}
+		return -1;
 	}
 
 	string input2UPPER(){
@@ -114,7 +115,7 @@ using namespace std;
 			if( int(s.at(i)) <= int('z') && int(s.at(i)) >= int('a')){
 				s.at(i) = char(int(s.at(i)) + int('A') - int('a'));
 			}
-			else {
+			else if (!(int(s.at(i)) <= int('Z') && int(s.at(i)) >= int('A'))){
 				s.at(i) = ' ';
 			}
 		}
@@ -157,6 +158,7 @@ void main()
 	Chatbot Alice;
 	string keywords;
 	string buf;
+	int kw;
 	
 	// member functions
 	do {
@@ -168,15 +170,17 @@ void main()
 		ofstream outputFile;
 		outputFile.open("datafile.txt");
 
-		int selection = rand() % 5;
-		mainresponse = alice_RNArray[0][selection].responseOutput();
-		cout <<mainresponse <<endl;
 
 		while(ss>>buf){
 			tokens.push_back(buf);
 			outputFile<<buf+"\n";
-			cout<<buf+"\n";
-			compareKeywords(buf);
+			//cout<<buf+"\n";
+			kw = compareKeywords(buf);
+			if (kw >= 0){
+				int selection = rand() % 5;
+				mainresponse = alice_RNArray[kw][selection].responseOutput();
+				cout << "Alice: " << mainresponse <<endl;
+			}
 		} outputFile.close();
 	}while (running());
 	
