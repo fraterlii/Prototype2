@@ -68,21 +68,21 @@ using namespace std;
 		alice_RNArray[0][1].manualConstructor("I don't do drugs.", 0);
 		alice_RNArray[0][2].manualConstructor("What exactly are you accusing me of?", 0);
 		alice_RNArray[0][3].manualConstructor("I don't know what you're talking about, and I'm not saying another word.", 0);
-		alice_RNArray[0][4].manualConstructor("I might have had a bump before leaving the party, but nothing major...", 0);
+		alice_RNArray[0][4].manualConstructor("I might have had a hit before driving, but it's nothing major...", 0);
 
 		// GUNS
 		alice_RNArray[1][0].manualConstructor("What guns?", 0);
 		alice_RNArray[1][1].manualConstructor("I don't own any guns.", 0);
 		alice_RNArray[1][2].manualConstructor("What exactly are you accusing me of?", 0);
-		alice_RNArray[1][3].manualConstructor("I have a right to silence.  I'm done answering these questions.", 0);
-		alice_RNArray[1][4].manualConstructor("It's my boyfriend's car!\nI'm not responsible for anything you found in there!", 0);
+		alice_RNArray[1][3].manualConstructor("I have a right to silence...\n       I'm not answering any more questions.", 0);
+		alice_RNArray[1][4].manualConstructor("It's my boyfriend's car!\n       I'm not responsible for anything you found in there!", 0);
 
 		// KIDNAP
-		alice_RNArray[2][0].manualConstructor("kidnap1", 0);
-		alice_RNArray[2][1].manualConstructor("kidnap2", 0);
-		alice_RNArray[2][2].manualConstructor("kidnap3", 0);
-		alice_RNArray[2][3].manualConstructor("kidnap4", 0);
-		alice_RNArray[2][4].manualConstructor("kidnap5", 0);
+		alice_RNArray[2][0].manualConstructor("WHAT?!...\n       A KIDNAPPING?!\n       Clay said that kid was his nephew!", 0);
+		alice_RNArray[2][1].manualConstructor("How could you even...\n       I would NEVER do something like that!", 0);
+		alice_RNArray[2][2].manualConstructor("Who do you think I am?\n       What do you think you're accusing me of officer?", 0);
+		alice_RNArray[2][3].manualConstructor("I don't have to listen to this anymore!\n       I'm done talking to you.", 0);
+		alice_RNArray[2][4].manualConstructor("Honestly, officer, I would never do that.\n       I swear to you, I don't know anything about a kidnapping.", 0);
 
 		// CAR
 		alice_RNArray[3][0].manualConstructor("car1", 0);
