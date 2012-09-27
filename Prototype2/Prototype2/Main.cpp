@@ -151,6 +151,7 @@ using namespace std;
 using namespace mainMethods;
 void main()
 {
+	string mainresponse;
 	// data declarations
 	build_alice_RNArray();
 	Chatbot Alice;
@@ -166,6 +167,11 @@ void main()
 		vector<string> tokens;
 		ofstream outputFile;
 		outputFile.open("datafile.txt");
+
+		int selection = rand() % 5;
+		mainresponse = alice_RNArray[0][selection].responseOutput();
+		cout <<mainresponse <<endl;
+
 		while(ss>>buf){
 			tokens.push_back(buf);
 			outputFile<<buf+"\n";
