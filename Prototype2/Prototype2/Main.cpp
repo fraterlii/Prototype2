@@ -9,8 +9,10 @@
 using namespace std;
 
 // globally defined data declarations
-string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "CAR", "PAO"};
-string negativeResponses[] = {"Wanna run that by me again?", "SPEAK CLEARLY!", "Is this some kind of mind game?", "What?", "I don't understand what you're getting at..."};
+string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "PARKING", "PAO"};
+string negativeResponses[] = {"Wanna run that by me again?", "Please be more direct.\n       Get to the point already...", "Is this some kind of mind game?", "What?", "I don't see what you're getting at..."};
+int previousOutput;
+int selection = rand() % 5;
 
 public class ResponseNode
 {
@@ -85,11 +87,11 @@ using namespace std;
 		alice_RNArray[2][4].manualConstructor("Honestly, officer, I would never do that.\n       I swear to you, I don't know anything about a kidnapping.", 0);
 
 		// CAR
-		alice_RNArray[3][0].manualConstructor("car1", 0);
-		alice_RNArray[3][1].manualConstructor("car2", 0);
-		alice_RNArray[3][2].manualConstructor("car3", 0);
-		alice_RNArray[3][3].manualConstructor("car4", 0);
-		alice_RNArray[3][4].manualConstructor("car5", 0);
+		alice_RNArray[3][0].manualConstructor("Is it a crime to be in a public parking lot?", 0);
+		alice_RNArray[3][1].manualConstructor("I was just sitting in the car with Clay...", 0);
+		alice_RNArray[3][2].manualConstructor("Where is this going?\n       There's nothing illegal about being in a public place.", 0);
+		alice_RNArray[3][3].manualConstructor("You know what?  I think I'd like to remain silent...", 0);
+		alice_RNArray[3][4].manualConstructor("Clay was overdosing.\n       I thought he was going to die, officer.\n       What was I supposed to do?", 0);
 
 		// PAO
 		alice_RNArray[4][0].manualConstructor("20% your semester grade.", 0);
@@ -167,13 +169,15 @@ using namespace std;
 	}
 
 	void show_AliceExposition() {
-		cout << "Suspect Name, Age, Sex, D.O.B.:  " << "\n\n  Alice Kremieux\n  23, Female\n  Feb. 3rd, 1989" << endl;
+		cout << "Suspect Name, Age, Sex, D.O.B.:  " << "\n\n  Alice Kremieux\n  23, Female\n  Feb. 3rd, 1989\n" << endl;
+		cout << "Suspect was found unconscious in driver's seat of vehicle.\nPolice had been notified of strange activity in parking lot of Taco Bell.\nHer boyfriend, Clay Alders, was hyperventilating from apparent drug overdose.\nBath salts were found scattered throughout the vehicle.\nTwo revolver-style pistols were identified in the trunk.\nA young boy, six years of age, was crying in the backseat.\nNeither Alice nor Clay are legal guardians of the boy.\nPossible kidnapping." << endl;
 		
 
 		cout << "\nMove on to questioning...";
 		cin.get();
 		cout << "\n\n";
 	}
+
 
 }
 
@@ -210,10 +214,7 @@ void main()
 				mainresponse = alice_RNArray[kw][rand() % 5].responseOutput();
 				cout << "Alice: " << mainresponse << endl << "\n";
 			}
-			else if (kw == -1) {
-				cout << "Alice: " << negativeResponses[rand() % 5] << endl << "\n";
-				break;
-			}
+			
 		} outputFile.close();
 	}while (running(buf));
 	
