@@ -9,21 +9,23 @@
 using namespace std;
 
 // globally defined data declarations
-string kwDummy[] = {"DRUGS", "GUNS", "KIDNAP", "PARKING", "PAO"};
-string negativeResponses[] = {"Wanna run that by me again?", "Please be more direct.\n       Get to the point already...", "Is this some kind of mind game?", "What?", "I don't see what you're getting at..."};
-int previousOutput;
-int selection = rand() % 5;
+string alice_kw_Array[] = {"DRUGS", "GUNS", "KIDNAP", "PARKING", "PAO"};
+int alice_kw_ArrayLength = sizeof(alice_kw_Array) / sizeof(string);
+
+string noMatchResponsesArray[] = {"Wanna run that by me again?", "Please be more direct.\n       Get to the point already...", "Is this some kind of mind game?", "What?", "I don't see what you're getting at..."};
+int noMatchResponsesArrayLength = sizeof(noMatchResponsesArray) / sizeof(string);
+
 
 public class ResponseNode
 {
 public:
-	// local data declarations
+	// ResponseNode local data declarations
 	string response;
 	int outputCount;
 
-	// local member functions
+	// ResponseNode local member functions
 	string responseOutput(){
-		// returns response string for output and increments outputCount by 1
+		// returns response and increments outputCount by 1
 
 		outputCount = outputCount +1;
 		return response;
@@ -40,22 +42,8 @@ public:
 	ResponseNode() {};
 };
 
-using namespace std;
-public class Chatbot
-{
-public:
-	// data declarations
-	string cbOutput;
 
-	// member functions
-	void showChatbotOutput() {
-		// prints the string value of cbOutput
-
-		cout << cbOutput << endl;
-	}
-};
-
-namespace mainMethods {
+namespace mainAssets {
 using namespace std;
 
 	// namespace data declarations
@@ -102,7 +90,7 @@ using namespace std;
 	}
 	
 	int compareKeywords(string buf) {
-		// checks the string parameter (user input) against the string values in kwDummy[]
+		// checks the string parameter (user input) against the string values in alice_kw_Array[]
 		// if a match is found, the index of the match is returned
 		// otherwise, a value of -1 is returned
 
@@ -111,7 +99,7 @@ using namespace std;
 		}
 
 		for (int i=0; i < 5; i++){
-			if (buf == kwDummy[i]){
+			if (buf == alice_kw_Array[i]){
 				return i;
 			}
 		}
@@ -119,6 +107,8 @@ using namespace std;
 	}
 
 	string input2UPPER(){
+		// gets user input and standardizes it in preparation for subsequent keyword comparison
+
 		string s;
 		getline (cin, s);
 		cout << endl;
@@ -142,15 +132,19 @@ using namespace std;
 	}
 
 	void showCasePoints() {
+		// outputs the available Keywords stored in alice_kw_Array[] 
+
 		cout << "Case Points: ";
 		for(int i=0; i < 4; i++){
-			cout << kwDummy[i];
+			cout << alice_kw_Array[i];
 			if(i<4-1) cout << ", ";
 		}
 		cout << endl;
 	}
 
 	bool running(string buf){
+		// returns the boolean value that controls the lifespan of our game loop
+
 		if (buf == "QUIT") {
 		cout << "\n\n\nDo you want to continue? (y or n): ";
 		return (input2UPPER() != "N");
@@ -164,35 +158,38 @@ using namespace std;
 		}
 	}
 
-	void getResponseNode(){
-		// description goes here
-	}
-
 	void show_AliceExposition() {
+		// displays introductory, expository information that will be used to question the chatbot
+		// hints at case points without explicitly naming them
+
 		cout << "Suspect Name, Age, Sex, D.O.B.:  " << "\n\n  Alice Kremieux\n  23, Female\n  Feb. 3rd, 1989\n" << endl;
-		cout << "Suspect was found unconscious in driver's seat of vehicle.\nPolice had been notified of strange activity in parking lot of Taco Bell.\nHer boyfriend, Clay Alders, was hyperventilating from apparent drug overdose.\nBath salts were found scattered throughout the vehicle.\nTwo revolver-style pistols were identified in the trunk.\nA young boy, six years of age, was crying in the backseat.\nNeither Alice nor Clay are legal guardians of the boy.\nPossible kidnapping." << endl;
+		cout << "Suspect was found unconscious in driver's seat of vehicle." << endl;
+		cout << "Police had been notified of strange activity in parking lot of Taco Bell." << endl;
+		cout << "Her boyfriend, Clay Alders, was hyperventilating from apparent drug overdose." << endl;
+		cout << "Bath salts were found scattered throughout the vehicle." << endl;
+		cout << "Two revolver-style pistols were identified in the trunk." << endl;
+		cout << "A young boy, approximately five years of age, was found crying in the backseat." << endl;
+		cout << "Neither Alice nor Clay are legal guardians of the boy." << endl;
+		cout << "Possible kidnapping." << endl;
 		
 
 		cout << "\nMove on to questioning...";
 		cin.get();
 		cout << "\n\n";
 	}
-
-
 }
 
 
 using namespace std;
-using namespace mainMethods;
+using namespace mainAssets;
 void main()
 {
-	string mainresponse;
-	// data declarations
-	build_alice_RNArray();
-	Chatbot Alice;
-	string keywords;
+	// main() data declarations
 	string buf;
-	int kw;
+	string keywords;
+	string mainresponse;
+	build_alice_RNArray();
+	int kwIndex;
 
 	show_AliceExposition();
 	
@@ -209,9 +206,9 @@ void main()
 		while(ss>>buf){
 			tokens.push_back(buf);
 			outputFile<<buf+"\n";
-			kw = compareKeywords(buf);
-			if (kw >= 0){
-				mainresponse = alice_RNArray[kw][rand() % 5].responseOutput();
+			kwIndex = compareKeywords(buf);
+			if (kwIndex >= 0){
+				mainresponse = alice_RNArray[kwIndex][rand() % 5].responseOutput();
 				cout << "Alice: " << mainresponse << endl << "\n";
 			}
 			
