@@ -47,11 +47,11 @@ namespace mainAssets {
 using namespace std;
 
 	// namespace data declarations									//how we guide the conversation is something to think about, and how he gets caught. 
-	ResponseNode alice_RNArray[18][5];
+	ResponseNode alice_RNArray[19][5];
 
 	// namespace member functions
 	void build_alice_RNArray() {
-		// Initializes each value within the alice_RNArray[5][5] variable
+		// Initializes each value within the alice_RNArray variable
 
 		// DRUGS
 		alice_RNArray[0][0].manualConstructor("What drugs?", 0);
@@ -192,6 +192,18 @@ using namespace std;
 		// if a match is found, the index of the match is returned
 		// otherwise, a value of -1 is returned
 
+		for (int i=0; i < 5; i++){
+			if (buf == alice_kw_Array[i])
+			{
+				return i;
+			}
+			else 
+			{
+				return -1;
+			}
+	}
+
+		/*
 		if (buf == "HINT" | buf == "QUIT") {
 			return -5;
 		}
@@ -202,6 +214,7 @@ using namespace std;
 			}
 		}
 		return -1;
+		*/
 	}
 
 	string input2UPPER(){
@@ -344,7 +357,7 @@ void main()
 			else 
 				if(kwIndex < 0)
 				{
-					cout<<"Alice: "<< "Pardon Me" <<endl <<"\n";
+					cout<<"Alice: "<< "I'm not sure I understand what you are talking about." <<endl <<"\n";
 				}
 			
 		} outputFile.close();
