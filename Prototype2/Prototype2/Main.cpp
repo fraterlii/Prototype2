@@ -192,18 +192,7 @@ using namespace std;
 		// if a match is found, the index of the match is returned
 		// otherwise, a value of -1 is returned
 
-		for (int i=0; i < 5; i++){
-			if (buf == alice_kw_Array[i])
-			{
-				return i;
-			}
-			else 
-			{
-				return -1;
-			}
-	}
-
-		/*
+		
 		if (buf == "HINT" | buf == "QUIT") {
 			return -5;
 		}
@@ -214,8 +203,8 @@ using namespace std;
 			}
 		}
 		return -1;
-		*/
 	}
+	
 
 	string input2UPPER(){
 		// gets user input and standardizes it in preparation for subsequent keyword comparison
