@@ -8,13 +8,12 @@
 
 using namespace std;
 // globally defined data declarations
-string drugs[]={"DRUGS","POT","MARIJUANA","DOSE","DOPE","WEED","GANJA","HEMP","MUSHROOM","LSD","COCAINE","",""};
+string drugs[]={"DRUGS","POT","MARIJUANA","DOSE","DOPE","WEED","GANJA","HEMP","MUSHROOM","LSD","COCAINE","COKE","HEROIN"};
 string weapons[]={"GUNS","RIFLE","RIFLES","WEAPONS","KNIFE","KNIVES","GUN","REVOLVERS","REVOLVER","SWORD","SWORDS","PISTOLS","PISTOL"};
-string kidnap[]={"KIDNAP","ABDUCT","SNATCH","","","","","","","","","",""};
-string murder[]={"MURDER","KILL","KILLED","SLAY","SNUFF","EXTERMINATION","ASSASSINATION","ELIMINATION","","","","",""};
-string terrorism[]={"TERRORISM","TERRORIST","TERRORIZE","","","","","","","","","",""};
-string robbery[]={"BLACKMAIL","BANDITRY","PIRACY","STEALING","STOLE","THEFT","SHOPLIFTING","BURGLARY","","","","",""};
-string alice_kw_Array[] = {"DRUGS","GUNS", "KIDNAP", "ROBBERY" , "MURDER", "TERRORISM","","","","","","",""};
+string kidnap[]={"KIDNAP","ABDUCT","SNATCH","@@@@","!!!!!","####","$$$$$$$","%%%%%%","^^^^^","&&&&&&","*****","((((((",")))))))"};
+string murder[]={"MURDER","KILL","KILLED","SLAY","SNUFF","EXTERMINATION","ASSASSINATION","ELIMINATION","~~~~~~","!!!!!!","@@@@@@@@","#########","$%%%%%%%%%%%%"};
+string robbery[]={"BLACKMAIL","BANDITRY","PIRACY","STEALING","STOLE","THEFT","SHOPLIFTING","BURGLARY","^^^^^^^^^","&&&&&&&&&&&","**********","!!!!!!!!!!!",")))))))))"};
+string alice_kw_Array[] = {"DRUGS","GUNS", "KIDNAP", "ROBBERY" , "MURDER"};
 int alice_kw_ArrayLength = sizeof(alice_kw_Array) / sizeof(string);
 
 string noMatchResponsesArray[] = {"Wanna run that by me again?", "Please be more direct.\n       Get to the point already...", "Is this some kind of mind game?", "What?", "I don't see what you're getting at..."};
@@ -92,13 +91,53 @@ using namespace std;
 		alice_RNArray[4][3].manualConstructor("I had nothing to do with that.", 0);
 		alice_RNArray[4][4].manualConstructor("Why are you asking me? I was out of town when he was killed.", 0);
 	
-		//Terrorism
+		//CAR
 		alice_RNArray[5][0].manualConstructor("I am not a terrorist, I love this country.", 0);
 		alice_RNArray[5][1].manualConstructor("Just because I look like this, doesn't mean I am a terrorist.", 0);
 		alice_RNArray[5][2].manualConstructor("What? A terrorist, no way i am a peaceful person.", 0);
 		alice_RNArray[5][3].manualConstructor("I wasn't involved, nor did I know anything about this incident.", 0);
 		alice_RNArray[5][4].manualConstructor("I was only carrying that stuff,but I didn't know what was there. You can't just accuse me like that.", 0);
 
+	}
+	size_t uiLevenshteinDistance(const std::string &s1, const std::string &s2)
+	{
+		const size_t m(s1.size());
+		const size_t n(s2.size());
+ 
+		if( m==0 ) return n;
+		if( n==0 ) return m;
+ 		size_t *costs = new size_t[n + 1];
+ 
+		for( size_t k=0; k<=n; k++ ) costs[k] = k;
+ 
+		size_t i = 0;
+		for ( std::string::const_iterator it1 = s1.begin(); it1 != s1.end(); ++it1, ++i )
+		{
+			costs[0] = i+1;
+			size_t corner = i;
+ 
+			size_t j = 0;
+			for ( std::string::const_iterator it2 = s2.begin(); it2 != s2.end(); ++it2, ++j )
+			{
+				size_t upper = costs[j+1];
+				if( *it1 == *it2 )
+				{
+					costs[j+1] = corner;
+				}
+				else
+				{
+					size_t t(upper<corner?upper:corner);
+					costs[j+1] = (costs[j]<t?costs[j]:t)+1;
+				}
+ 
+				corner = upper;
+			}
+		}
+ 
+		size_t result = costs[n];
+		delete [] costs;
+ 
+		return result;
 	}
 	
 	int compareKeywords(string buf) {
@@ -107,31 +146,28 @@ using namespace std;
 		// otherwise, a value of -1 is returned
 
 		
-		if (buf == "HINT" || buf == "QUIT") {
-			return -5;
-		}
-
-		for (int i=0; i < 13; i++){
-			if (buf == alice_kw_Array[i]){
-				return i;
+			if (buf == "HINT" || buf == "QUIT") {
+				return -5;
 			}
-			else if(buf == drugs[i]){
+			
+			for (int i=0; i < 13; i++){
+			/*if (buf == alice_kw_Array[i]){
+				return i;
+			}*/
+			if(uiLevenshteinDistance(drugs[i],buf)<2){
 				return 0;
 			}
-			else if(buf == weapons[i]){
+			else if(uiLevenshteinDistance(weapons[i],buf)<2){
 				return 1;
 			}
-			else if(buf == kidnap[i]){
+			else if(uiLevenshteinDistance(kidnap[i],buf)<2){
 				return 2;
 			}
-			else if (buf== robbery[i]){
-				return 4;
+			else if (uiLevenshteinDistance(robbery[i],buf)<2){
+				return 3;
 			}
-			else if (buf == murder[i]){
+			else if (uiLevenshteinDistance(murder[i],buf)<2){
 				return 4;
-			}
-			else if(buf == terrorism[i]){
-				return 5;
 			}
 			
 		}
@@ -210,50 +246,8 @@ using namespace std;
 		cin.get();
 		cout << "\n\n";
 	}
-
-	/* testing this algorithm 
-	inline void splitString(char c[])
-{
-	char tempchar1[NUM] = " ";
-	char tempchar2[NUM] = " ";
-	char tempchar3[NUM] = " ";
-
-	for(int i = 0; i < NUM;i++)
-	{
-		tempchar1[i] = c[i];
-
-		if(c[i + 1] == ' ')
-		{
-			for(int r = i + 2;r < NUM;r++)
-			{
-				tempchar2[r - (i + 2)] = c[r];
-
-				if(c[r + 1] == ' ')
-				{
-					for(int q = r + 2; q < NUM;q++)
-					{
-						tempchar3[q - (r + 2)] = c[q];
-					}
-					r = NUM;
-				}
-			}
-			i = NUM;
-		}
-		
-	}*/
 	
 }
-/*int KeyWordMatch(){
-	int number_of_line=0;
-	string c;
-	ifstream myFile;
-	myFile.open("Drugs.txt");
-	while(myFile.good()){
-		getline(myFile,c);
-	}if (
-	return 0;
-}*/
-
 using namespace std;
 using namespace mainAssets;
 void main()
