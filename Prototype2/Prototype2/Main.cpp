@@ -283,7 +283,7 @@ void main()
 			}
 			
 		} outputFile.close();
-		if (hit == 0) mainresponse = "I'm not sure I understand what you are talking about.";
+		if (hit == 0) mainresponse = noMatchResponsesArray[rand() % 5];
 		else if (hit > 1) mainresponse = "One thing at a time, please.";
 		cout << "Alice: " << mainresponse << endl << endl;
 
