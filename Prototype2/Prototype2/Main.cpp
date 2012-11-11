@@ -142,7 +142,7 @@ using namespace std;
 		alice_RNArray[12][1].manualConstructor("I did not start a riot.", 0);
 		alice_RNArray[12][2].manualConstructor("I had not burn his store.", 0);
 		alice_RNArray[12][3].manualConstructor("No, my conduct is good.", 0);
-		alice_RNArray[12][4].manualConstructor("Why are you asking me? I didn't do anything.", 0)
+		alice_RNArray[12][4].manualConstructor("Why are you asking me? I didn't do anything.", 0);
 
 		//Hate Crime
 		alice_RNArray[13][0].manualConstructor("I love people, I wouldn't do such a thing", 0);
@@ -193,7 +193,7 @@ using namespace std;
 		// otherwise, a value of -1 is returned
 
 		
-		if (buf == "HINT" | buf == "QUIT") {
+		if (buf == "HINT" || buf == "QUIT") {
 			return -5;
 		}
 
@@ -306,8 +306,8 @@ using namespace std;
 			}
 			i = NUM;
 		}
-		*/
-	}
+		
+	}*/
 	
 }
 
