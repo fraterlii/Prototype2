@@ -268,12 +268,13 @@ void main()
 	
 
 	do {
-		
+		int hit = 0;
 		keywords = getKeywords();
 		stringstream ss(keywords);
 		vector<string> tokens;
 		ofstream outputFile;
 		outputFile.open("datafile.txt");
+		mainresponse = "";
 
 
 		while(ss>>buf){
@@ -281,16 +282,15 @@ void main()
 			outputFile<<buf+"\n";
 			kwIndex = compareKeywords(buf);
 			if (kwIndex >= 0){
+				hit++;
 				mainresponse = alice_RNArray[kwIndex][rand() % 5].responseOutput();
-				cout << "Alice: " << mainresponse << endl << "\n";
 			}
-			else 
-				if(kwIndex < 0)
-				{
-					cout<<"Alice: "<< "I'm not sure I understand what you are talking about." <<endl <<"\n";
-				}
 			
 		} outputFile.close();
+		if (hit == 0) mainresponse = "I'm not sure I understand what you are talking about.";
+		else if (hit > 1) mainresponse = "One thing at a time, please.";
+		cout << "Alice: " << mainresponse << endl << endl;
+
 	}while (running(buf));
 	
 }
