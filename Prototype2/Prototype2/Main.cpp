@@ -8,6 +8,7 @@
 
 using namespace std;
 // globally defined data declarations
+//synonyms declarations
 string drugs[]={"DRUGS","POT","MARIJUANA","DOSE","DOPE","WEED","GANJA","HEMP","MUSHROOM","LSD","COCAINE","COKE","HEROIN"};
 string weapons[]={"GUNS","RIFLE","RIFLES","WEAPONS","KNIFE","KNIVES","GUN","REVOLVERS","REVOLVER","SWORD","SWORDS","PISTOLS","PISTOL"};
 string kidnap[]={"KIDNAP","ABDUCT","SNATCH","@@@@","!!!!!","####","$$$$$$$","%%%%%%","^^^^^","&&&&&&","*****","((((((",")))))))"};
@@ -91,7 +92,7 @@ using namespace std;
 		alice_RNArray[4][3].manualConstructor("I had nothing to do with that.", 0);
 		alice_RNArray[4][4].manualConstructor("Why are you asking me? I was out of town when he was killed.", 0);
 	
-		//CAR
+		//Terrorism
 		alice_RNArray[5][0].manualConstructor("I am not a terrorist, I love this country.", 0);
 		alice_RNArray[5][1].manualConstructor("Just because I look like this, doesn't mean I am a terrorist.", 0);
 		alice_RNArray[5][2].manualConstructor("What? A terrorist, no way i am a peaceful person.", 0);
@@ -99,6 +100,7 @@ using namespace std;
 		alice_RNArray[5][4].manualConstructor("I was only carrying that stuff,but I didn't know what was there. You can't just accuse me like that.", 0);
 
 	}
+	//calculates the similarities in words and return the integer value.
 	size_t uiLevenshteinDistance(const std::string &s1, const std::string &s2)
 	{
 		const size_t m(s1.size());
@@ -154,7 +156,7 @@ using namespace std;
 			/*if (buf == alice_kw_Array[i]){
 				return i;
 			}*/
-			if(uiLevenshteinDistance(drugs[i],buf)<2){
+			if(uiLevenshteinDistance(drugs[i],buf)<2){			//if the uiLenevnshteinDistance is less than 2 means if the words are not similar within range of 1, its not gonna work.
 				return 0;
 			}
 			else if(uiLevenshteinDistance(weapons[i],buf)<2){
