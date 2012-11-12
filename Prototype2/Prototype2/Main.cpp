@@ -148,7 +148,7 @@ using namespace std;
 		// otherwise, a value of -1 is returned
 
 		
-			if (buf == "HINT" || buf == "QUIT") {
+			if (buf == "SHOWMENU") {
 				return -5;
 			}
 			
@@ -213,20 +213,19 @@ using namespace std;
 		cout << endl;
 	}
 
-	bool running(string buf){
+	bool running(bool p){
 		// returns the boolean value that controls the lifespan of our game loop
-
-		if (buf == "QUIT") {
-		cout << "\n\n\nDo you want to continue? (y or n): ";
-		return (input2UPPER() != "N");
+		bool running;
+		string response;
+		running = true;
+		if (p){
+			cout << "\nPlease enter either HINT, CONTINUE, or QUIT:";
+			response = input2UPPER();
+			if (response == "QUIT") running = false;
+			if (response == "HINT") showCasePoints();
+			//If the user inputs anything else we will assume that they wish to continue.
 		}
-		else if (buf == "HINT") {
-			showCasePoints();
-			return true;
-		}
-		else {
-			return true;
-		}
+		return running;
 	}
 
 	void show_AliceExposition() {
@@ -255,38 +254,49 @@ using namespace mainAssets;
 void main()
 {
 	// main() data declarations
-	string buf;
+	string buf, command;
 	string keywords;
 	string mainresponse;
 	build_alice_RNArray();
-	int kwIndex;
+	int kwIndex, hit;
 	show_AliceExposition();
+	bool paused;
 	
 
 	do {
-		int hit = 0;
+		hit = 0;
 		keywords = getKeywords();
 		stringstream ss(keywords);
 		vector<string> tokens;
 		ofstream outputFile;
 		outputFile.open("datafile.txt");
 		mainresponse = "";
-
+		paused = false;
+		command = "none";
 
 		while(ss>>buf){
 			tokens.push_back(buf);
 			outputFile<<buf+"\n";
 			kwIndex = compareKeywords(buf);
-			if (kwIndex >= 0){
+			if (kwIndex == -5){
+				paused = true;
+			}
+			else if (kwIndex >= 0){
 				hit++;
 				mainresponse = alice_RNArray[kwIndex][rand() % 5].responseOutput();
 			}
 			
 		} outputFile.close();
-		if (hit == 0) mainresponse = noMatchResponsesArray[rand() % 5];
-		else if (hit > 1) mainresponse = "One thing at a time, please.";
-		cout << "Alice: " << mainresponse << endl << endl;
+		if (!paused) {
+			if (hit == 0){ //No keyword matches
+				mainresponse = noMatchResponsesArray[rand() % 5];
+			}
+			else if (hit > 1){ //Multiple keyword matches
+				mainresponse = "One thing at a time, please.";
+			}
+			cout << "Alice: " << mainresponse << endl << endl;
+		}
 
-	}while (running(buf));
+	}while (running(paused));
 	
 }
